@@ -60,6 +60,19 @@
 			{"url_keyword_x", "36", NULL, EVM_RESTART_FIREWALL},
 			{0,0,0,0}
 		};
+		
+	struct variable variables_SmartdnsConf_SdnsList[] = {
+			{"sdnss_enable_x", "24", NULL, FALSE},
+			{"sdnss_name_x", "24", NULL, FALSE},
+			{"sdnss_ip_x", "24", NULL, FALSE},
+			{"sdnss_port_x", "24", NULL, FALSE},
+			{"sdnss_type_x", "24", NULL, FALSE},
+			{"sdnss_ipc_x", "24", NULL, FALSE},
+			{"sdnss_named_x", "24", NULL, FALSE},
+			{"sdnss_non_x", "24", NULL, FALSE},
+			{"sdnss_ipset_x", "24", NULL, FALSE},
+			{0,0,0,0}
+		};
 
 	struct variable variables_FirewallConfig_MFList[] = {
 			{"macfilter_list_x", "20", NULL, FALSE},
@@ -803,6 +816,66 @@
 			{0,0,0,0}
 		};
 
+#if defined(APP_SMARTDNS)
+    struct variable variables_SmartdnsConf[] = {
+			{"sdns_enable", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_name", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_port", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_tcp_server", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_ipv6_server", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_redirect", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_cache", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_cache_persist", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_tcp_idle_time", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_rr_ttl", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_rr_ttl_min", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_rr_ttl_max", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_rr_ttl_reply_max", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_max_reply_ip_num", "", NULL, EVM_RESTART_SMARTDNS},
+
+			{"sdns_speed", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_speed_mode", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_address", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_ns", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_as", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_ipset", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_ipset_timeout", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_ip_change", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_ip_change_time", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_force_aaaa_soa", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_force_qtype_soa", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_prefetch_domain", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_exp", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_exp_ttl", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_exp_ttl_max", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_exp_prefetch_time", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_dualstack_ip_allow_force_AAAA", "", NULL, EVM_RESTART_SMARTDNS},
+
+			{"sdnse_enable", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_port", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_tcp", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_name", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_speed", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_ipset", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_address", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_ns", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_as", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_ipv6_server", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_ipc", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdnse_cache", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_adblock", "", NULL, EVM_RESTART_SMARTDNS},	
+			{"sdns_adblock_url","",NULL, FALSE},
+			{"sdns_white", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_black", "", NULL, EVM_RESTART_SMARTDNS},
+			{"sdns_coredump", "", NULL, EVM_RESTART_SMARTDNS},	
+			{"sdns_staticnum_x", "", NULL, EVM_RESTART_SMARTDNS},
+			{"scripts.smartdns_address.conf", "File", NULL, EVM_RESTART_SMARTDNS},
+			{"scripts.smartdns_blacklist-ip.conf", "File", NULL, EVM_RESTART_SMARTDNS},
+			{"scripts.smartdns_whitelist-ip.conf", "File", NULL, EVM_RESTART_SMARTDNS},
+			{"scripts.smartdns_custom.conf", "File", NULL, EVM_RESTART_SMARTDNS},
+			{"SdnsList", "Group", ARGV((char*)variables_SmartdnsConf_SdnsList, "8", "55", "sdns_staticnum_x"), EVM_RESTART_SMARTDNS},
+		};
+#endif
 	struct variable variables_WLANConfig11b[] = {
 			{"rt_ssid", "", NULL, EVM_RESTART_WIFI2},
 			{"rt_ssid2", "", NULL, EVM_RESTART_WIFI2},
@@ -915,6 +988,9 @@
 		{"DeviceSecurity11b",		variables_DeviceSecurity11b},
 		{"WLANAuthentication11a",	variables_WLANAuthentication11a},
 		{"WLANAuthentication11b",	variables_WLANAuthentication11b},
+#if defined(APP_SMARTDNS)
+		{"SmartdnsConf",		variables_SmartdnsConf},
+#endif
 		{"LANGUAGE",			variables_Language},
 		{0,0}
 	};
@@ -989,6 +1065,9 @@
 #if defined(APP_ARIA)
 		{EVM_RESTART_ARIA,		EVT_RESTART_ARIA,		RCN_RESTART_ARIA,	EVM_RESTART_FIREWALL},
 #endif
+#endif
+#if defined(APP_SMARTDNS)
+		{EVM_RESTART_SMARTDNS,		EVT_RESTART_SMARTDNS,		RCN_RESTART_SMARTDNS,	0},
 #endif
 #if defined(APP_SMBD) || defined(APP_NMBD)
 		{EVM_RESTART_NMBD,		EVT_RESTART_NMBD,		RCN_RESTART_NMBD,	0},

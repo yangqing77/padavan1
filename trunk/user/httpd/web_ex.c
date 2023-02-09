@@ -1922,6 +1922,15 @@ wan_action_hook(int eid, webs_t wp, int argc, char **argv)
 	}
 #endif
 
+#if defined (APP_SMARTDNS)
+static int smartdns_status_hook(int eid, webs_t wp, int argc, char **argv)
+{
+	int smartdns_status_code = pids("smartdns");
+	websWrite(wp, "function smartdns_status() { return %d;}\n", smartdns_status_code);
+	return 0;
+}
+#endif
+
 	websWrite(wp, "<script>restart_needed_time(%d);</script>\n", needed_seconds);
 	return 0;
 }
@@ -2095,6 +2104,11 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_dnscrypt = 0;
 #endif
+#if defined(APP_SMARTDNS)
+	int found_app_smartdns = 1;
+#else
+	int found_app_smartdns = 0;
+#endif
 #if defined(SUPPORT_WPAD)
 	int found_support_wpad = 1;
 #else
@@ -2265,6 +2279,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function found_app_tor() { return %d;}\n"
 		"function found_app_privoxy() { return %d;}\n"
 		"function found_app_dnscrypt() { return %d;}\n"
+		"function found_app_smartdns() { return %d;}\n"
 		"function found_support_wpad() { return %d;}\n"
 		"function found_support_zram() { return %d;}\n"
 		"function found_app_xupnpd() { return %d;}\n",
@@ -2285,6 +2300,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		found_app_tor,
 		found_app_privoxy,
 		found_app_dnscrypt,
+		found_app_smartdns,
 		found_support_wpad,
 		found_support_zram,
 		found_app_xupnpd
@@ -3948,6 +3964,9 @@ struct ej_handler ej_handlers[] =
 	{ "delete_sharedfolder", ej_delete_sharedfolder},
 	{ "modify_sharedfolder", ej_modify_sharedfolder},
 	{ "set_share_mode", ej_set_share_mode},
+#endif
+#if defined (APP_SMARTDNS)
+	{ "smartdns_status", smartdns_status_hook},
 #endif
 	{ "openssl_util_hook", openssl_util_hook},
 	{ "openvpn_srv_cert_hook", openvpn_srv_cert_hook},

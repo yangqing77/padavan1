@@ -390,6 +390,23 @@ restart_dnscrypt(void)
 }
 #endif
 
+#if defined(APP_SMARTDNS)
+void stop_smartdns(void){
+	eval("/usr/bin/smartdns.sh","stop");
+}
+
+void start_smartdns(void){
+	int smartdns_mode = nvram_get_int("sdns_enable");
+	if ( smartdns_mode == 1)
+		eval("/usr/bin/smartdns.sh","start");
+}
+
+void restart_smartdns(void){
+	stop_smartdns();
+	start_smartdns();
+}
+#endif
+
 void
 start_httpd(int restart_fw)
 {
@@ -642,6 +659,9 @@ stop_services(int stopall)
 #endif
 #if defined(APP_DNSCRYPT)
 	stop_dnscrypt();
+#endif
+#if defined(APP_SMARTDNS)
+	stop_smartdns();
 #endif
 	stop_networkmap();
 	stop_lltd();

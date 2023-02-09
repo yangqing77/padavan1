@@ -628,6 +628,62 @@ struct nvram_pair router_defaults[] = {
 	{ "crond_enable", "0" },
 	{ "crond_log", "0" },
 
+#if defined(APP_SMARTDNS)
+	/*SmartDNS*/
+	{ "sdns_enable", "0" },
+	{ "sdns_name", "smartdns" },
+	{ "sdns_port", "6053" },
+	{ "sdns_tcp_server", "1" },
+	{ "sdns_ipv6_server", "1" },
+	{ "sdns_redirect", "1" },
+	{ "sdns_cache", "5120" },
+	{ "sdns_cache_persist", "1" },
+	{ "sdns_tcp_idle_time","120"},
+	{ "sdns_rr_ttl", "300" },
+	{ "sdns_rr_ttl_min", "600" },
+	{ "sdns_rr_ttl_max", "3600" },
+	{ "sdns_rr_ttl_reply_max", "60" },
+	{ "sdns_max_reply_ip_num", "3" },
+
+	{ "sdns_speed", "0" },
+	{ "sdns_speed_mode", "ping,tcp:80,tcp:443" },
+	{ "sdns_address", "0" },
+	{ "sdns_ns", "0" },
+	{ "sdns_ipset", "0" },
+	{ "sdns_ipset_timeout", "1" },
+	{ "sdns_as", "0" },
+	{ "sdns_ip_change", "1" },
+	{ "sdns_ip_change_time", "15" },
+	{ "sdns_force_aaaa_soa", "0" },
+	{ "sdns_force_qtype_soa", "65" },
+	{ "sdns_prefetch_domain", "1" },
+	{ "sdns_exp", "1" },
+	{ "sdns_exp_ttl", "345600" },
+	{ "sdns_exp_ttl_max", "5" },
+	{ "sdns_exp_prefetch_time", "43200" },
+	{ "sdns_dualstack_ip_allow_force_AAAA", "1" },
+
+	{ "sdnse_enable", "0" },
+	{ "sdnse_port", "7053" },
+	{ "sdnse_tcp", "1" },
+	{ "sdnse_name", "oversea" },
+	{ "sdnse_speed", "1" },
+	{ "sdnse_ipset", "0" },
+	{ "sdnse_address", "1" },
+	{ "sdnse_ns", "1" },
+	{ "sdnse_as", "0" },
+	{ "sdnse_ipv6_server", "1" },
+	{ "sdnse_ipc", "1" },
+	{ "sdnse_cache", "1" },
+
+	{ "sdns_adblock", "0" },
+	{ "sdns_adblock_url", "https://anti-ad.net/anti-ad-for-smartdns.conf" },
+	{ "sdns_white", "0" },
+	{ "sdns_black", "0" },
+	{ "sdns_coredump", "0" },
+	{ "sdns_staticnum_x", "0" },
+#endif
+
 #if defined(SUPPORT_ZRAM)
 	{ "zram_enable", "0" },
 #endif
@@ -814,6 +870,18 @@ struct nvram_pair tables_defaults[] = {
 	{ "sr_gateway_x", "" },
 	{ "sr_matric_x", "" },
 	{ "sr_if_x", "" },
+
+#if defined(APP_SMARTDNS)
+	{ "sdnss_enable_x", "" },
+	{ "sdnss_name_x", "" },
+	{ "sdnss_ip_x", "" },
+	{ "sdnss_port_x", "" },
+	{ "sdnss_type_x", "" },
+	{ "sdnss_ipc_x", "" },
+	{ "sdnss_named_x", "" },
+	{ "sdnss_ipset_x", "" },
+	{ "sdnss_non_x", "" },
+#endif
 
 	{ "dhcp_staticmac_x", "" },
 	{ "dhcp_staticip_x", "" },

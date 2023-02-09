@@ -542,6 +542,11 @@ void stop_dnscrypt(void);
 void start_dnscrypt(void);
 void restart_dnscrypt(void);
 #endif
+#if defined(APP_SMARTDNS)
+void stop_smartdns(void);
+void start_smartdns(void);
+void restart_smartdns(void);
+#endif
 
 /* services_ex.c */
 int fill_dnsmasq_servers(void);
