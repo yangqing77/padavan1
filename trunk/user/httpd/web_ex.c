@@ -1922,6 +1922,10 @@ wan_action_hook(int eid, webs_t wp, int argc, char **argv)
 	}
 #endif
 
+	websWrite(wp, "<script>restart_needed_time(%d);</script>\n", needed_seconds);
+	return 0;
+}
+
 #if defined (APP_SMARTDNS)
 static int smartdns_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
@@ -1930,10 +1934,6 @@ static int smartdns_status_hook(int eid, webs_t wp, int argc, char **argv)
 	return 0;
 }
 #endif
-
-	websWrite(wp, "<script>restart_needed_time(%d);</script>\n", needed_seconds);
-	return 0;
-}
 
 static int
 ej_detect_internet_hook(int eid, webs_t wp, int argc, char **argv)
